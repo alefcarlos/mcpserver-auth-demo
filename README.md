@@ -115,3 +115,4 @@ No external data dependencies for math tools.
 - https://www.youtube.com/watch?v=H0SGK1yPHD0
 - https://modelcontextprotocol.io/docs/tutorials/security/authorization
 - https://www.keycloak.org/2025/09/keycloak-2640-released
+- https://modelcontextprotocol.io/specification/draft/basic/authorization
