@@ -68,7 +68,8 @@ The server uses:
 
 ### OAuth Server
 
-This demo uses `Keycloak 26.4` that implements `RFC 8414` which is required for MCP OAuth resource metadata.
+This demo uses `Keycloak 26.4` that implements `RFC 8414` and `RFC 7591` which is required for MCP OAuth resource metadata.
+
 
 ## Configuration Details
 
@@ -94,6 +95,8 @@ No external data dependencies for math tools.
   dotnet dev-certs https --clean
   dotnet dev-certs https --trust
   ```
+
+- Validates trusted hosts for dynamic client registration.
 
 ## References
 
