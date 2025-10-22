@@ -30,6 +30,15 @@ The OAuth server will start at `http://localhost:8080` and server will be availa
 
 > The vscode cliente for mcp does not support https using self-signed certificates yet, so you need to use http endpoint for testing. [#248170](https://github.com/microsoft/vscode/issues/248170) 
 
+
+### Step 2: Test server using vscode
+
+TBD
+
+### Step 2.1: Teste server using manual flow notebook
+
+TBD
+
 ## What the Server Provides
 
 ### Protected Resources
