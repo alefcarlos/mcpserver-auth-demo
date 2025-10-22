@@ -26,7 +26,7 @@ cd SampleAspNetCoreMcp.AppHost
 dotnet run --lp http
 ```
 
-The OAuth server will start at `http://localhost:8080` and server will be available at `https://localhost:5522`
+The OAuth server will start at `http://localhost:8080` and server will be available at `http://localhost:5522`
 
 > The vscode cliente for mcp does not support https using self-signed certificates yet, so you need to use http endpoint for testing. [#248170](https://github.com/microsoft/vscode/issues/248170) 
 
