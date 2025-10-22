@@ -66,6 +66,10 @@ The server uses:
 - **Simple in-process logic** for math operations
 - **Authorization** to protect MCP endpoints
 
+### OAuth Server
+
+This demo uses `Keycloak 26.4` that implements `RFC 8414` which is required for MCP OAuth resource metadata.
+
 ## Configuration Details
 
 - **Server URL**: `http://localhost:8080`
@@ -90,3 +94,12 @@ No external data dependencies for math tools.
   dotnet dev-certs https --clean
   dotnet dev-certs https --trust
   ```
+
+## References
+
+- https://github.com/localden/min-cs-mcp-auth/tree/main
+- https://github.com/modelcontextprotocol/csharp-sdk
+- https://github.com/mikekistler/mcp-auth-illustrated/blob/main/github.ipynb
+- https://www.youtube.com/watch?v=H0SGK1yPHD0
+- https://modelcontextprotocol.io/docs/tutorials/security/authorization
+- https://www.keycloak.org/2025/09/keycloak-2640-released
