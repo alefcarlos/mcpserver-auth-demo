@@ -33,11 +33,13 @@ The OAuth server will start at `http://localhost:8080` and server will be availa
 
 ### Step 2: Test server using vscode
 
-TBD
+Follow [this guide](https://modelcontextprotocol.io/docs/tutorials/security/authorization#testing-the-mcp-server) to test the server using Visual Studio Code 
 
 ### Step 2.1: Teste server using manual flow notebook
 
-TBD
+- [Polyglot Notebooks Extensions](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode)
+
+The file `manual-flow.ipynb` contains a Jupyter notebook that demonstrates how to manually obtain an access token from the OAuth server and use it to access the protected MCP server endpoints.
 
 ## What the Server Provides
 
@@ -82,8 +84,8 @@ This demo uses `Keycloak 26.4` that implements `RFC 8414` and `RFC 7591` which i
 
 ## Configuration Details
 
-- **Server URL**: `http://localhost:8080`
-- **OAuth Server**: `https://localhost:5522`
+- **Server URL**: `http://localhost:5522`
+- **OAuth Server**: `http://localhost:8080`
 
 ## Testing Without Client
 
