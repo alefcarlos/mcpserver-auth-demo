@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
@@ -16,20 +15,12 @@ public sealed class MathTools
         _principal = principal;
     }
 
-    [McpServerTool, Description("Prints user")]
-    public Task<Dictionary<string, string>> UserInfo()
-    {
-        var claims = _principal.Claims.ToDictionary(x => x.Type, x => x.Value);
-
-        return Task.FromResult(claims);
-    }
-
     [McpServerTool, Description("Add two numbers together.")]
+    [Authorize]
     public Task<string> Add(
         [Description("First operand")] double a,
         [Description("Second operand")] double b)
     {
-        Console.WriteLine();
         var result = a + b;
         return Task.FromResult($"Add from user {_principal.Identity!.Name}: a + b = {result}");
     }

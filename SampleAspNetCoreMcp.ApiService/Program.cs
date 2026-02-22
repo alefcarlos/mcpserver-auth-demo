@@ -52,7 +52,7 @@ builder.Services.AddDbContext<ToDoDbContext>(options =>
 
 builder.Services.AddMcpServer()
     .AddAuthorizationFilters()
-    .WithToolsFromAssembly(typeof(CreateTodoTool).Assembly)
+    .WithToolsFromAssembly(typeof(TodoList).Assembly)
     .WithHttpTransport();
 
 var app = builder.Build();
