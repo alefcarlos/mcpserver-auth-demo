@@ -5,6 +5,8 @@ using SampleAspNetCoreMcp.ApiService.Tools;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(opts => opts.AddDefaultPolicy(policy => policy.SetIsOriginAllowed(_ => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
+
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
 
@@ -33,10 +35,8 @@ builder.Services.AddAuthentication(options =>
     {
         options.ResourceMetadata = new()
         {
-            Resource = new Uri("http://localhost:5522"),
-            ResourceDocumentation = new Uri("https://docs.example.com/api/math"),
-            AuthorizationServers = { new Uri(builder.Configuration["Authentication:Schemes:Bearer:Authority"]!) },
-            ScopesSupported = ["mcp:tools"]
+            AuthorizationServers = { builder.Configuration["Authentication:Schemes:Bearer:Authority"]! },
+            ScopesSupported = ["mcp:tools", "profile"]
         };
     })
     ;
@@ -44,6 +44,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddMcpServer()
     .WithTools<MathTools>()
     .WithHttpTransport();
@@ -55,10 +56,14 @@ app.UseHttpLogging();
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
 
-// app.UseCors();
+app.UseCors();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapDefaultEndpoints();
-app.MapMcp()
+
+app.MapMcp("/mcp")
     .RequireAuthorization()
     ;
 
