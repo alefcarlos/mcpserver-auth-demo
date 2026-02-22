@@ -1,0 +1,32 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "backlog": {
+      "type": "local",
+      "command": [
+        "backlog",
+        "mcp",
+        "start"
+      ],
+      "environment": {
+        "BACKLOG_CWD": "C:\\repos\\github.com\\alefcarlos\\mcpserver-auth-demo"
+      }
+    },
+    "aspire": {
+      "type": "local",
+      "command": [
+        "aspire",
+        "mcp",
+        "start"
+      ]
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp@latest"
+      ]
+    }
+  }
+}

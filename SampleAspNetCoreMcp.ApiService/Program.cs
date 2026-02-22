@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.EntityFrameworkCore;
 using ModelContextProtocol.AspNetCore.Authentication;
+using SampleAspNetCoreMcp.ApiService.Data;
 using SampleAspNetCoreMcp.ApiService.Tools;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,7 +38,7 @@ builder.Services.AddAuthentication(options =>
         options.ResourceMetadata = new()
         {
             AuthorizationServers = { builder.Configuration["Authentication:Schemes:Bearer:Authority"]! },
-            ScopesSupported = ["mcp:tools", "profile"]
+            ScopesSupported = ["mcp:tools", "profile", "email"]
         };
     })
     ;
@@ -45,8 +47,11 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddDbContext<ToDoDbContext>(options =>
+    options.UseInMemoryDatabase("ToDoDb"));
+
 builder.Services.AddMcpServer()
-    .WithTools<MathTools>()
+    .WithToolsFromAssembly(typeof(CreateTodoTool).Assembly)
     .WithHttpTransport();
 
 var app = builder.Build();
