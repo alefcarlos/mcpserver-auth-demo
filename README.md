@@ -13,17 +13,16 @@ The Protected MCP Server sample shows how to:
 
 ## Prerequisites
 
-- .NET 9.0 or later
+- .NET 10.0 or later
 
 ## Setup and Running
 
 ### Step 1: Start the Aspire Host project
 
-First, you need to start APpHost project:
+First, you need to start all the deps using aspire:
 
 ```bash
-cd SampleAspNetCoreMcp.AppHost
-dotnet run --lp http
+aspire run
 ```
 
 The OAuth server will start at `http://localhost:8080` and server will be available at `http://localhost:5522`
@@ -34,6 +33,10 @@ The OAuth server will start at `http://localhost:8080` and server will be availa
 ### Step 2: Test server using vscode
 
 Follow [this guide](https://modelcontextprotocol.io/docs/tutorials/security/authorization#testing-the-mcp-server) to test the server using Visual Studio Code 
+
+### Step 2.2: Test server using MCP Inspector
+
+Access [http://localhost:6274/](http://localhost:6274/) and follow `Guided OAuth Flow`
 
 ### Step 2.1: Teste server using manual flow notebook
 
@@ -79,7 +82,7 @@ The server uses:
 
 ### OAuth Server
 
-This demo uses `Keycloak 26.4` that implements `RFC 8414` and `RFC 7591` which is required for MCP OAuth resource metadata.
+This demo uses `Keycloak 26` that implements `RFC 8414` and `RFC 7591` which is required for MCP OAuth resource metadata.
 
 
 ## Configuration Details
