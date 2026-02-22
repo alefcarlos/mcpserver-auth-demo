@@ -17,6 +17,11 @@ The Protected MCP Server sample shows how to:
 
 ## Setup and Running
 
+### Users
+
+*email*: alef@alef.com
+*password*: 123
+
 ### Step 1: Start the Aspire Host project
 
 First, you need to start all the deps using aspire:
@@ -34,11 +39,11 @@ The OAuth server will start at `http://localhost:8080` and server will be availa
 
 Follow [this guide](https://modelcontextprotocol.io/docs/tutorials/security/authorization#testing-the-mcp-server) to test the server using Visual Studio Code 
 
-### Step 2.2: Test server using MCP Inspector
+### Step 2.1: Test server using MCP Inspector
 
 Access [http://localhost:6274/](http://localhost:6274/) and follow `Guided OAuth Flow`
 
-### Step 2.1: Teste server using manual flow notebook
+### Step 2.2: Test server using manual flow notebook
 
 - [Polyglot Notebooks Extensions](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode)
 
@@ -68,7 +73,7 @@ The server provides math tools that require authentication:
 The server is configured to:
 - Accept JWT bearer tokens from the OAuth server at `https://localhost:8080`
 - Validate token audience as `apiservice`
-- Require tokens to have appropriate scopes (`mcp:tools`)
+- Require tokens to have appropriate scopes (`mcp:tools`, `profile`)
 - Provide OAuth resource metadata for client discovery
 
 ## Architecture
@@ -84,11 +89,11 @@ The server uses:
 
 This demo uses `Keycloak 26` that implements `RFC 8414` and `RFC 7591` which is required for MCP OAuth resource metadata.
 
-
 ## Configuration Details
 
 - **Server URL**: `http://localhost:5522`
 - **OAuth Server**: `http://localhost:8080`
+- **MCP Inspector**: `http://localhost:6274`
 
 ## Testing Without Client
 
@@ -111,6 +116,15 @@ No external data dependencies for math tools.
   ```
 
 - Validates trusted hosts for dynamic client registration.
+
+### Realm Full Export
+
+Ensures Keycloak container is stoped and run the following command to export the realm configuration:
+
+```sh
+docker run --rm --volumes-from <container> quay.io/keycloak/keycloak:latest export --realm local --file /opt/keycloak/data/export.json --users same_file
+docker cp <container>:/opt/keycloak/data/export.json .
+``` 
 
 ## References
 

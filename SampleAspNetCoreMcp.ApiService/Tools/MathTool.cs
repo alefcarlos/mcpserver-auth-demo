@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Security.Claims;
 using ModelContextProtocol.Server;
 
 namespace SampleAspNetCoreMcp.ApiService.Tools;
@@ -7,20 +8,21 @@ namespace SampleAspNetCoreMcp.ApiService.Tools;
 [McpServerToolType]
 public sealed class MathTools
 {
-    private readonly IHttpContextAccessor _h;
+    private readonly ClaimsPrincipal _principal;
 
-    public MathTools(IHttpContextAccessor h)
+    public MathTools(ClaimsPrincipal principal)
     {
-        _h = h;
+        _principal = principal;
     }
 
     [McpServerTool, Description("Add two numbers together.")]
-    public Task<double> Add(
+    public Task<string> Add(
         [Description("First operand")] double a,
         [Description("Second operand")] double b)
     {
-        Console.WriteLine(_h.HttpContext.User.Identity.Name);
-        return Task.FromResult(a + b);
+        Console.WriteLine();
+        var result = a + b;
+        return Task.FromResult($"Add from user {_principal.Identity!.Name}: a + b = {result}");
     }
 
     [McpServerTool, Description("Multiply two numbers together.")]
