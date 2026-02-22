@@ -1,6 +1,6 @@
 ---
 name: refinar-task
-description: Refina tasks do backlog.md seguindo o padrão da TASK-2 (descrição detalhada, passos numerados, pseudocódigo)
+description: Refina tasks do backlog.md seguindo o padrão (descrição detalhada, passos numerados, pseudocódigo)
 license: MIT
 compatibility: opencode
 metadata:
@@ -28,3 +28,22 @@ Deve seguir o padrão:
 - Descrição com explicação + Passos + Pseudocódigo
 - Sem Definition of Done separados (tudo na descrição)
 - Status final: "Refined"
+
+## Template de Descrição
+
+```
+## Descrição
+
+[Resumo do objetivo da task]
+
+### Passos para executar:
+1. [Passo 1 - ação concreta]
+2. [Passo 2 - ação concreta]
+3. [Passo n - ação concreta]
+
+### Implementação
+
+```lang
+// Pseudocódigo a ser definido durante refinamento
+```
+```
