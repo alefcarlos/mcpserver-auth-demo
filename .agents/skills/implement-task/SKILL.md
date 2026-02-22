@@ -22,7 +22,10 @@ Quando o usuário pedir para implementar uma task que já está refinada (status
 4. Use `backlog_task_edit` para mudar status para "In Progress"
 5. Siga os passos da descrição para implementar
 6. Execute build e testes
-7. Use `backlog_task_edit` para mudar status para "Done"
+7. Use o comando `/review` para fazer code review automático:
+   - Execute `/review` para analisar as mudanças
+   - Apresente o resultado para o usuário confirmar
+8. Após aprovação do review, use `backlog_task_edit` para mudar status para "Done"
 
 ## Padrão de status
 - "Refined" → pronto para implementar

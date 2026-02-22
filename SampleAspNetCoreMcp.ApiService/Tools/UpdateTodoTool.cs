@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 using ModelContextProtocol.Server;
 using SampleAspNetCoreMcp.ApiService.Data;
 using SampleAspNetCoreMcp.ApiService.Models;
@@ -24,13 +25,12 @@ public sealed class UpdateTodoTool
         [Description("New title (optional)")] string? title = null,
         [Description("New description (optional)")] string? description = null)
     {
-        var userEmail = _principal.FindFirstValue(ClaimTypes.Email) 
-            ?? _principal.FindFirstValue("email") 
-            ?? "unknown";
+        var userEmail = _principal.FindFirstValue(ClaimTypes.Email) ?? "unknown";
 
-        var todoItem = await _dbContext.ToDoItems.FindAsync(id);
-        
-        if (todoItem is null || todoItem.UserEmail != userEmail)
+        var todoItem = await _dbContext.ToDoItems
+            .FirstOrDefaultAsync(t => t.Id == id && t.UserEmail == userEmail);
+
+        if (todoItem is null)
         {
             return null;
         }
