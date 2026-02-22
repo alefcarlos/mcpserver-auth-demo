@@ -1,6 +1,9 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.EntityFrameworkCore;
 using ModelContextProtocol.AspNetCore.Authentication;
+using SampleAspNetCoreMcp.ApiService.Data;
 using SampleAspNetCoreMcp.ApiService.Tools;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,15 +31,14 @@ builder.Services.AddAuthentication(options =>
     })
     .AddJwtBearer(options =>
     {
-        options.MapInboundClaims = false;
-        options.TokenValidationParameters.NameClaimType = "given_name";
+        options.TokenValidationParameters.NameClaimType = ClaimTypes.GivenName;
     })
     .AddMcp(options =>
     {
         options.ResourceMetadata = new()
         {
             AuthorizationServers = { builder.Configuration["Authentication:Schemes:Bearer:Authority"]! },
-            ScopesSupported = ["mcp:tools", "profile"]
+            ScopesSupported = ["mcp:tools", "profile", "email", "roles"]
         };
     })
     ;
@@ -45,8 +47,12 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddDbContext<ToDoDbContext>(options =>
+    options.UseInMemoryDatabase("ToDoDb"));
+
 builder.Services.AddMcpServer()
-    .WithTools<MathTools>()
+    .AddAuthorizationFilters()
+    .WithToolsFromAssembly(typeof(TodoList).Assembly)
     .WithHttpTransport();
 
 var app = builder.Build();

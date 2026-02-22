@@ -1,6 +1,6 @@
-using System;
 using System.ComponentModel;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using ModelContextProtocol.Server;
 
 namespace SampleAspNetCoreMcp.ApiService.Tools;
@@ -16,11 +16,11 @@ public sealed class MathTools
     }
 
     [McpServerTool, Description("Add two numbers together.")]
+    [Authorize]
     public Task<string> Add(
         [Description("First operand")] double a,
         [Description("Second operand")] double b)
     {
-        Console.WriteLine();
         var result = a + b;
         return Task.FromResult($"Add from user {_principal.Identity!.Name}: a + b = {result}");
     }
