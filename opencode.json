@@ -1,5 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "opencode-pty@0.2.3"
+  ],
   "instructions": [
     ".agents/rules/*.md"
   ],
@@ -29,7 +32,10 @@
         "npx",
         "-y",
         "@playwright/mcp@latest"
-      ]
+      ],
+      "environment":{
+        "PLAYWRIGHT_MCP_BROWSER": "msedge"
+      }
     }
   }
 }
